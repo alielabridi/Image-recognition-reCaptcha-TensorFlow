@@ -15,7 +15,7 @@ label = sys.argv[1]
 
 #set the directory to where to put the crawled picture
 #where tensorFlow will retrieve them later
-directory = "/tf_files/flower_photos"+ "/" +label
+directory = "/tf_files/pictures"+ "/" +label
 
 #tensorFlow parse all the folder in the tf_files
 #if by any change it finds a folder or a subfolder with a name
@@ -54,7 +54,7 @@ if not os.path.exists(directory):
 	--model_dir=/tf_files/inception \
 	--output_graph=/tf_files/retrained_graph.pb \
 	--output_labels=/tf_files/retrained_labels.txt \
-	--image_dir /tf_files/flower_photos", shell=True)
+	--image_dir /tf_files/pictures", shell=True)
 
 
 minIndex = ""
