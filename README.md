@@ -10,6 +10,12 @@ Fall 2016 - Al Akhawayn University
 
 Image recognition using Tensor Flow and Google Inception 
 
+**_Video explanatory:_** [https://www.youtube.com/watch?v=aJ7kvZgl1Vs](https://www.youtube.com/watch?v=aJ7kvZgl1Vs)
+
+**_Docker Image with our program: _**[https://drive.google.com/open?id=0B_YOfafxQHLAT2hBcG5oMFhHVkU](https://drive.google.com/open?id=0B_YOfafxQHLAT2hBcG5oMFhHVkU)
+
+**_Github repository:_** [https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow](https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow)
+
 *Motivation*: We want to build an image recognition program that given a set of 6 images for example and a label X, It will recognize the image that does not correspond to the label X such as in Figure 1. This kind of problem are found in bot detection programs such as Recaptcha. We want this program to be able to learn on the fly if it encountered a category that it does not have in its dataset by crawling data learning set from the internet, specifically Google Images. Thus we use a strong neural network that has already been designed for this called Google Inception used on a Machine learning program called Tensor Flow. The program developed will recognized whether the given label is already in the trained set of the program, if not, It will crawl the internet looking for corresponding pictures of that X label and train our neural network to recognize them, then go through the set of 6 images to tell which one is not X. 
 
 ![image alt text](ImagesReadMe/image_0.png)
@@ -118,7 +124,7 @@ Important:
 
 "Your sample code will now be in "
 
-/tensorflow/tensorflow/examples/image_retraining/
+/tensorflow/tensorflow/examples/ImagesReadMe/image_retraining/
 
 This is where the files ended up after I pulled:
 
@@ -132,11 +138,11 @@ This is where the files ended up after I pulled:
 
 Keep in mind that "We're only training the final layer of [this] network." 
 
-**This command takes a lot of arguments, and each one is explained in the tutorial. Before executing, make sure the first directory to ****retrain.py**** is correct, and the ****--image_dir**** is correct. The rest of the directories are used for outputting the results of the training. **
+**This command takes a lot of arguments, and each one is explained in the tutorial. Before executing, make sure the first directory to ****retrain.py**** is correct, and the ****--ImagesReadMe/image_dir**** is correct. The rest of the directories are used for outputting the results of the training. **
 
 Here is the (modifications in bold) command that is used to retrain the network: 
 
-python **/tensorflow/**tensorflow/examples/image_retraining/retrain.py \
+python **/tensorflow/**tensorflow/examples/ImagesReadMe/image_retraining/retrain.py \
 
  --bottleneck_dir=/tf_files/bottlenecks \
 
@@ -148,7 +154,7 @@ python **/tensorflow/**tensorflow/examples/image_retraining/retrain.py \
 
  --output_labels=/tf_files/retrained_labels.txt \
 
- --image_dir /tf_files/flower_photos
+ --ImagesReadMe/image_dir /tf_files/flower_photos
 
 "This script loads the pre-trained Inception v3 model, removes the old final layer, and trains a new one on the flower photos you've downloaded."
 
@@ -210,7 +216,11 @@ We now set it up to use our own data, instead of the jpgs provided by Google. Th
 
 # B. Implementation
 
-The following code ([https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow/blob/master/Image-Recognition-ReCaptcha-Fooling.py](https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow/blob/master/Image-Recognition-ReCaptcha-Fooling.py)) is executed with python as following: py Image-Recognition-ReCaptcha-Fooling.py tree tree1.jpg tree2.jpg tree3.jpg daisy.jpg
+The following code ([https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow/blob/master/Image-Recognition-ReCaptcha-Fooling.py](https://github.com/alielabridi/Image-recognition-reCaptcha-TensorFlow/blob/master/Image-Recognition-ReCaptcha-Fooling.py)) is executed with python as following: 
+
+python Image-Recognition-ReCaptcha-Fooling.py tree tree1.jpg tree2.jpg tree3.jpg daisy.jpg
+
+```python
 
 # Creator: Ali ELABRIDI and Brandon Crane
 
@@ -302,7 +312,7 @@ if not os.path.exists(directory):
 
 	#that contained the pictures crawled and classify them as the name of the folder
 
-	subprocess.call("python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
+	subprocess.call("python /tensorflow/tensorflow/examples/ImagesReadMe/image_retraining/retrain.py \
 
 	--bottleneck_dir=/tf_files/bottlenecks \
 
@@ -314,7 +324,7 @@ if not os.path.exists(directory):
 
 	--output_labels=/tf_files/retrained_labels.txt \
 
-	--image_dir /tf_files/flower_photos", shell=True)
+	--ImagesReadMe/image_dir /tf_files/flower_photos", shell=True)
 
 minIndex = ""
 
@@ -324,11 +334,11 @@ for x in sys.argv[2:]:
 
 	#print x
 
-	image_path = x
+	ImagesReadMe/image_path = x
 
-	# Read in the image_data
+	# Read in the ImagesReadMe/image_data
 
-	image_data = tf.gfile.FastGFile(ImagesReadMe/image_path, 'rb').read()
+	ImagesReadMe/image_data = tf.gfile.FastGFile(ImagesReadMe/image_path, 'rb').read()
 
 	# Loads label file, strips off carriage return
 
@@ -348,13 +358,13 @@ for x in sys.argv[2:]:
 
 	with tf.Session() as sess:
 
-	    # Feed the image_data as input to the graph and get first prediction
+	    # Feed the ImagesReadMe/image_data as input to the graph and get first prediction
 
 	    softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 
 	    predictions = sess.run(softmax_tensor, \
 
-	             {'DecodeJpeg/contents:0': image_data})
+	             {'DecodeJpeg/contents:0': ImagesReadMe/image_data})
 
 	    # Sort to show labels of first prediction in order of confidence
 
@@ -393,4 +403,85 @@ for x in sys.argv[2:]:
 #are bellow it as being not corresponding to the label
 
 print "The one that is not a "+label+ " is: "+ minIndex
+
+```
+
+# 
+C. Google Inception v3 (Convolutional Neural Network)
+
+(most of the content has been retrieved from https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html)
+
+## 1.What is Google Inception
+
+![image alt text](ImagesReadMe/image_11.png)
+
+We train an artificial neural network by showing it millions of training examples and gradually adjusting the network parameters until it gives the classifications we want. The network typically consists of 10-30 stacked layers of artificial neurons. Each image is fed into the input layer, which then talks to the next layer, until eventually the "output" layer is reached. The network’s “answer” comes from this final output layer. One of the challenges of neural networks is understanding what exactly goes on at each layer. We know that after training, each layer progressively extracts higher and higher-level features of the image, until the final layer essentially makes a decision on what the image shows. For example, the first layer maybe looks for edges or corners. Intermediate layers interpret the basic features to look for overall shapes or components, like a door or a leaf. The final few layers assemble those into complete interpretations—these neurons activate in response to very complex things such as entire buildings or trees.we train networks by simply showing them many examples of what we want them to learn, hoping they extract the essence of the matter at hand. For Google Inception, instead of exactly prescribing which feature we want the network to amplify, it also lets the network make that decision. In this case we simply feed the network an arbitrary image or photo and let the network analyze the picture. It then picks a layer and ask the network to enhance whatever it detected. Each layer of the network deals with features at a different level of abstraction, so the complexity of features it generates depends on which layer it enhances. For example, lower layers tend to produce strokes or simple ornament-like patterns, because those layers are sensitive to basic features such as edges and their orientations (see figure 2 and 3)
+
+![image alt text](ImagesReadMe/image_12.png).
+
+	Figure 2: image processed by a layer of Google Inception to amplify some features
+
+## ![image alt text](ImagesReadMe/image_13.png)
+
+	Figure 3: image processed by a layer of Google Inception to amplify some features
+
+In higher-level layers, which identify more sophisticated features in images, complex features or even whole objects tend to emerge. Again, we just start with an existing image and give it to our neural net. It asks the network: "Whatever you see there, I want more of it!" This creates a feedback loop: if a cloud looks a little bit like a bird, the network will make it look more like a bird. This in turn will make the network recognize the bird even more strongly on the next pass and so forth, until a highly detailed bird appears, seemingly out of nowhere.
+
+![image alt text](ImagesReadMe/image_14.png)
+
+![image alt text](ImagesReadMe/image_15.png)
+
+The results are intriguing—even a relatively simple neural network can be used to over-interpret an image, just like as children we enjoyed watching clouds and interpreting the random shapes. This network was trained mostly on images of animals, so naturally it tends to interpret shapes as animals. But because the data is stored at such a high abstraction, the results are an interesting remix of these learned features.
+
+![image alt text](ImagesReadMe/image_16.png)
+
+If we apply the algorithm iteratively on its own outputs and apply some zooming after each iteration, we get an endless stream of new impressions, exploring the set of things the network knows about, as seen in the following images:
+
+![image alt text](ImagesReadMe/image_17.png)
+
+## 2.Why did we choose Google Inception
+
+Google inception uses deep convolutional networks that have been central to the largest advances in image recognition performance in recent years. Moreover, Google inception architecture has shown great performance at relatively low computational cost as it has proven it for classification and detection in the ImageNet Large Scale Visual Recognition Challenge 2016 (ILSVRC), where software programs compete to correctly classify and detect objects and scenes ([http://image-net.org/challenges/LSVRC/2016/results](http://image-net.org/challenges/LSVRC/2016/results)).
+
+# D. TesorFlow
+
+(most of the content has been retrieved from https://www.tensorflow.org/) 
+
+### 1. What is TensorFlow?
+
+TensorFlow is an open source software library for numerical computation using data flow graphs. Nodes in the graph represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) communicated between them. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API. TensorFlow was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research, but the system is general enough to be applicable in a wide variety of other domains as well.
+
+## 2. What is a Data Flow Graph?
+
+Data flow graphs describe mathematical computation with a directed graph of nodes & edges. Nodes typically implement mathematical operations, but can also represent endpoints to feed in data, push out results, or read/write persistent variables. Edges describe the input/output relationships between nodes. These data edges carry dynamically-sized multidimensional data arrays, or tensors. The flow of tensors through the graph is where TensorFlow gets its name. Nodes are assigned to computational devices and execute asynchronously and in parallel once all the tensors on their incoming edges becomes available.
+
+# ![image alt text](ImagesReadMe/image_18.gif)
+
+## 3. Why did we choose TensorFlow?
+
+TensorFlow gave us access to the Inception v3 convolutional neural network. This is a very powerful neural network that was needed to complete our task. Creating our own way of classifying images would not come close to the accuracy of Inception v3 (as seen in [this](https://research.googleblog.com/2015/12/how-to-classify-images-with-tensorflow.html) research blog). On top of that, TensorFlow is open source, so if we needed to change anything in the source, we could. It’s purpose is to give "students, researchers, hobbyists, hackers, engineers, developers, inventors and innovators" access to standard tools for machine learning. We used it exactly for this purpose. Another reason to use this product is its portability. Code will run consistently on all different types of machines, so long as the right dependencies are installed. 
+
+## E. Docker 
+
+(quotes from https://www.docker.com/what-docker#/VM)
+
+## 1. What is Docker?
+
+Docker is a technology centered around containers. "Containers include the application and all of its dependencies --but share the kernel with other containers, running as isolated processes in user space on the host operating system. Docker containers are not tied to any specific infrastructure: they run on any computer, on any infrastructure, and in any cloud." This is creates an efficient environment that is easy to develop for and run on any machine.
+
+## 2. Why did we choose Docker?
+
+We used Docker because Google Developers had already created a docker image that had all of the dependencies needed to run TensorFlow. That was a more consistent option than installing all of the dependencies. This also allowed easy access of shared resources (such as hardware and file directories) between the native applications and the container. 
+
+# Reference
+
+Large Scale Visual Recognition Challenge 2016 (ILSVRC2016). (n.d.). Retrieved December 03, 2016, from http://image-net.org/challenges/LSVRC/2016/results 
+
+ @. (2015). Inceptionism: Going Deeper into Neural Networks. Retrieved December 03, 2016, from https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html 
+
+TensorFlow is an Open Source Software Library for Machine Intelligence. (n.d.). Retrieved December 03, 2016, from [https://www.tensorflow.org/](https://www.tensorflow.org/)
+
+@. (2015, December 07). How to Classify Images with TensorFlow. Retrieved December 03, 2016, from https://research.googleblog.com/2015/12/how-to-classify-images-with-tensorflow.html
+
+(n.d.). Retrieved December 3, 2016, from https://www.docker.com/what-docker#/VM
 
